@@ -9,26 +9,26 @@ import time
 
 
 def scrape_top_list(url):
-    if path.exists('movies.txt'):
-        print('file exists')
-        print('opening and reading existing file')
+    if path.exists('movies.json'):
+        # print('file exists')
+        # print('opening and reading existing file')
 
-        json_file = open('movies.txt', 'r')
+        json_file = open('movies.json', 'r')
         movies_file = json_file.read()
         movies_list = json.loads(movies_file)
         return movies_list
 
     else:
         top_movies_list=scrape_top_list_if_no_file(url)
-        print('file does not exist')
+        # print('file does not exist')
 
-        text_file = open('movies.txt', 'w')
+        text_file = open('movies.json', 'w')
         text_file.write(json.dumps(top_movies_list))
         text_file.close()
-        print('file created')
+        # print('file created')
 
-        print('opening and reading created file')
-        json_file = open('movies.txt', 'r')
+        # print('opening and reading created file')
+        json_file = open('movies.json', 'r')
         movies_file = json_file.read()
         movies_list = json.loads(movies_file)
 
@@ -91,26 +91,26 @@ def group_by_decade(top_movies_list):  #Task 3 #function to group all movies by 
 
 
 def scrape_movie_details(top_movies_list):
-    if path.exists('movies_details.txt'):
-        print('file exists')
-        print('opening and reading existing file')
+    if path.exists('movies_details.json'):
+        # print('file exists')
+        # print('opening and reading existing file')
 
-        json_file = open('movies_details.txt', 'r')
+        json_file = open('movies_details.json', 'r')
         movies_file = json_file.read()
         movies_list = json.loads(movies_file)
         return movies_list
 
     else:
         movie_more_details = get_url_link_if_nofile(top_movies_list)
-        print('file does not exist')
+        # print('file does not exist')
 
-        text_file = open('movies_details.txt', 'w')
+        text_file = open('movies_details.json', 'w')
         text_file.write(json.dumps(movie_more_details))
         text_file.close()
-        print('file created')
+        # print('file created')
 
-        print('opening and reading created file')
-        json_file = open('movies_details.txt', 'r')
+        # print('opening and reading created file')
+        json_file = open('movies_details.json', 'r')
         movies_file = json_file.read()
         movies_list = json.loads(movies_file)
 
@@ -181,6 +181,9 @@ def get_url_link_if_nofile(top_movies_list):
         # scrape_movie_details(movie_url)
         movie_details_dict = scrape_movie_details_if_nofile(movie_url)
         movies_more_details.append(movie_details_dict)
+        t = random.randint(1, 3)
+        time.sleep(t)
+
         # print(movies_more_details,end='\n\n\n')
     # print(movies_more_details)
     return movies_more_details
@@ -210,10 +213,10 @@ def analyse_movies_by_director(top10_movie_details): #Task 7
 
 
 
-url = 'https://www.imdb.com/india/top-rated-indian-movies/'
+# url = 'https://www.imdb.com/india/top-rated-indian-movies/'
 
 #    <-------------Task 1----------------->
-top_movies_list = scrape_top_list(url)                    #gives list top of top 250 movies with position,name,year,rating and url
+# top_movies_list = scrape_top_list(url)                    #gives list top of top 250 movies with position,name,year,rating and url
 # print('top_movies_list:',len(top_movies_list))
 # for movie in top_movies_list:
 #     for detail in movie:
@@ -254,7 +257,7 @@ top_movies_list = scrape_top_list(url)                    #gives list top of top
 
 
 #    <-------------Task 5----------------->
-top10_movie_details= scrape_top10_movie_details(top_movies_list)
+# top10_movie_details= scrape_top10_movie_details(top_movies_list)
 # for movie in top10_movie_details:
 #     for detail in movie:
 #         print(detail,':',movie[detail],sep=' ')
