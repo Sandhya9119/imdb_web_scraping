@@ -212,6 +212,28 @@ def analyse_movies_by_director(top10_movie_details): #Task 7
     return top10_movies_by_director
 
 
+def analyse_by_language_and_director(top_movies_list):
+    movie_analysis_dict={}
+    movies_details=scrape_movie_details(top_movies_list)
+
+    for movie in movies_details:
+        for director in movie['Directors']:
+            if director in movie_analysis_dict:
+                for language in movie['Language']:
+                    if language in movie_analysis_dict[director]:
+                        movie_analysis_dict[director][language]+=1
+                    else:
+                        movie_analysis_dict[director][language]=1
+            else:
+                movie_analysis_dict[director]={}
+                for language in movie['Language']:
+                    if language in movie_analysis_dict[director]:
+                        movie_analysis_dict[director][language] += 1
+                    else:
+                        movie_analysis_dict[director][language] = 1
+                
+    return movie_analysis_dict
+
 
 # url = 'https://www.imdb.com/india/top-rated-indian-movies/'
 
@@ -275,3 +297,9 @@ def analyse_movies_by_director(top10_movie_details): #Task 7
 # for director in top10_movies_by_director:
 #     print(director, ':', top10_movies_by_director[director], sep=' ')
                                         
+# movie_analysis_dict= analyse_by_language_and_director(top_movies_list)
+# for director in movie_analysis_dict:
+#     print(director,':')
+#     for languages in movie_analysis_dict[director]:
+#         print('\t\t',languages,':',movie_analysis_dict[director][languages])
+#     print('\n')
